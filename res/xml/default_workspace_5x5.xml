@@ -27,4 +27,43 @@
     <!-- Hotseat -->
     <include launcher:workspace="@xml/dw_hotseat_5" />
 
+    <!-- Bottom row -->
+	<appwidget
+        launcher:packageName="cz.martykan.forecastie"
+        launcher:className="cz.martykan.forecastie.widgets.TimeWidgetProvider"
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="-5"
+        launcher:spanX="5"
+        launcher:spanY="1" />
+
+    <!-- screen 1 -->
+    <resolve
+        launcher:screen="1"
+        launcher:x="1"
+        launcher:y="-1" >
+        <favorite
+        launcher:packageName="com.mapswithme.maps.pro"
+        launcher:className="com.mapswithme.maps.DownloadResourcesActivity"
+        />
+    </resolve>
+    <resolve
+        launcher:screen="1"
+        launcher:x="2"
+        launcher:y="-1" >
+        <favorite
+        launcher:packageName="org.fdroid.fdroid"
+        launcher:className="org.fdroid.fdroid.views.main.MainActivity"
+        />
+    </resolve>
+    <resolve
+        launcher:screen="1"
+        launcher:x="3"
+        launcher:y="-1" >
+        <favorite
+        launcher:packageName="com.android.settings"
+        launcher:className="com.android.settings.Settings"
+        />
+    </resolve>
+
 </favorites>
