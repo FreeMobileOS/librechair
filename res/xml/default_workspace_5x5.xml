@@ -31,7 +31,7 @@
 	<appwidget
         launcher:packageName="cz.martykan.forecastie"
         launcher:className="cz.martykan.forecastie.widgets.TimeWidgetProvider"
-        launcher:screen="0"
+        launcher:screen="1"
         launcher:x="0"
         launcher:y="-5"
         launcher:spanX="5"
