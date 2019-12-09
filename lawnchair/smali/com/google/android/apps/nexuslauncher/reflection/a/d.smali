@@ -9,16 +9,6 @@
 .field private static final aY:Lcom/google/android/apps/nexuslauncher/reflection/alpha/PredictionUsageHelper;
 
 
-# instance fields
-.field public final aZ:Ljava/lang/String;
-
-.field public final ba:Ljava/lang/String;
-
-.field public final bb:Ljava/lang/String;
-
-.field public final bc:Ljava/lang/String;
-
-
 # direct methods
 .method static constructor <clinit>()V
     .locals 2
@@ -65,8 +55,6 @@
 
     move-result-object v0
 
-    iput-object v0, p0, Lcom/google/android/apps/nexuslauncher/reflection/alpha/PredictionUsageHelper;->aZ:Ljava/lang/String;
-
     .line 30
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -81,8 +69,6 @@
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
-
-    iput-object v0, p0, Lcom/google/android/apps/nexuslauncher/reflection/alpha/PredictionUsageHelper;->ba:Ljava/lang/String;
 
     .line 31
     new-instance v0, Ljava/lang/StringBuilder;
@@ -99,8 +85,6 @@
 
     move-result-object v0
 
-    iput-object v0, p0, Lcom/google/android/apps/nexuslauncher/reflection/alpha/PredictionUsageHelper;->bb:Ljava/lang/String;
-
     .line 32
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -115,8 +99,6 @@
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object p1
-
-    iput-object p1, p0, Lcom/google/android/apps/nexuslauncher/reflection/alpha/PredictionUsageHelper;->bc:Ljava/lang/String;
 
     return-void
 .end method
