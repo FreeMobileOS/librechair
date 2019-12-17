@@ -569,9 +569,6 @@
     .line 225
     invoke-virtual {p0, v0, v1}, Lcom/google/android/apps/nexuslauncher/reflection/h;->a(Lcom/google/android/apps/nexuslauncher/reflection/signal/a;Z)V
 
-    .line 226
-    invoke-virtual {p0, p1, p2, v0}, Lcom/google/android/apps/nexuslauncher/reflection/h;->predict(Ljava/lang/String;ILcom/google/android/apps/nexuslauncher/reflection/signal/a;)V
-
     return-void
 .end method
 
