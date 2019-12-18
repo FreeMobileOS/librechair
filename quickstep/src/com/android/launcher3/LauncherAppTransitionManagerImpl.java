@@ -665,8 +665,8 @@ public class LauncherAppTransitionManagerImpl extends LauncherAppTransitionManag
                 MODE_OPENING);
         RemoteAnimationTargetSet closingTargets = new RemoteAnimationTargetSet(targets,
                 MODE_CLOSING);
-        SyncRtSurfaceTransactionApplier surfaceApplier = new SyncRtSurfaceTransactionApplier(
-                mFloatingView);
+        //SyncRtSurfaceTransactionApplier surfaceApplier = new SyncRtSurfaceTransactionApplier(
+        //        mFloatingView);
 
         ValueAnimator appAnimator = ValueAnimator.ofFloat(0, 1);
         appAnimator.setDuration(APP_LAUNCH_DURATION);
@@ -730,7 +730,7 @@ public class LauncherAppTransitionManagerImpl extends LauncherAppTransitionManag
                     params[i] = new SurfaceParams(target.leash, alpha, matrix, targetCrop,
                             RemoteAnimationProvider.getLayer(target, MODE_OPENING));
                 }
-                surfaceApplier.scheduleApply(params);
+                //surfaceApplier.scheduleApply(params);
             }
         });
         return appAnimator;
@@ -781,34 +781,7 @@ public class LauncherAppTransitionManagerImpl extends LauncherAppTransitionManag
                     mLauncher.getStateManager().moveToRestState();
                 }
 
-                AnimatorSet anim = null;
-                RemoteAnimationProvider provider = mRemoteAnimationProvider;
-                if (provider != null) {
-                    anim = provider.createWindowAnimation(targetCompats);
-                }
-
-                if (anim == null) {
-                    anim = new AnimatorSet();
-                    anim.play(getClosingWindowAnimators(targetCompats));
-
-                    // Normally, we run the launcher content animation when we are transitioning
-                    // home, but if home is already visible, then we don't want to animate the
-                    // contents of launcher unless we know that we are animating home as a result
-                    // of the home button press with quickstep, which will result in launcher being
-                    // started on touch down, prior to the animation home (and won't be in the
-                    // targets list because it is already visible). In that case, we force
-                    // invisibility on touch down, and only reset it after the animation to home
-                    // is initialized.
-                    if (launcherIsATargetWithMode(targetCompats, MODE_OPENING)
-                            || mLauncher.isForceInvisible()) {
-                        // Only register the content animation for cancellation when state changes
-                        mLauncher.getStateManager().setCurrentAnimation(anim);
-                        createLauncherResumeAnimation(anim);
-                    }
-                }
-
                 mLauncher.clearForceInvisibleFlag(INVISIBLE_ALL);
-                result.setAnimation(anim);
             }
         };
     }
@@ -817,14 +790,15 @@ public class LauncherAppTransitionManagerImpl extends LauncherAppTransitionManag
      * Animator that controls the transformations of the windows the targets that are closing.
      */
     protected Animator getClosingWindowAnimators(RemoteAnimationTargetCompat[] targets) {
-        SyncRtSurfaceTransactionApplier surfaceApplier =
-                new SyncRtSurfaceTransactionApplier(mDragLayer);
+        //SyncRtSurfaceTransactionApplierCompat surfaceApplier =
+        //        new SyncRtSurfaceTransactionApplierCompat(mDragLayer);
         Matrix matrix = new Matrix();
         ValueAnimator closingAnimator = ValueAnimator.ofFloat(0, 1);
         int duration = CLOSING_TRANSITION_DURATION_MS;
         closingAnimator.setDuration(duration);
         closingAnimator.addUpdateListener(new MultiValueUpdateListener() {
             FloatProp mDy = new FloatProp(0, mClosingWindowTransY, 0, duration, DEACCEL_1_7);
+            FloatProp mScale = new FloatProp(1f, 1f, 0, duration, DEACCEL_1_7);
             FloatProp mAlpha = new FloatProp(1f, 0f, 25, 125, LINEAR);
 
             @Override
@@ -832,8 +806,11 @@ public class LauncherAppTransitionManagerImpl extends LauncherAppTransitionManag
                 SurfaceParams[] params = new SurfaceParams[targets.length];
                 for (int i = targets.length - 1; i >= 0; i--) {
                     RemoteAnimationTargetCompat target = targets[i];
-                    float alpha;
+                    final float alpha;
                     if (target.mode == MODE_CLOSING) {
+                        matrix.setScale(mScale.value, mScale.value,
+                                target.sourceContainerBounds.centerX(),
+                                target.sourceContainerBounds.centerY());
                         matrix.postTranslate(0, mDy.value);
                         matrix.postTranslate(target.position.x, target.position.y);
                         alpha = mAlpha.value;
@@ -845,7 +822,7 @@ public class LauncherAppTransitionManagerImpl extends LauncherAppTransitionManag
                             target.sourceContainerBounds,
                             RemoteAnimationProvider.getLayer(target, MODE_CLOSING));
                 }
-                surfaceApplier.scheduleApply(params);
+                //surfaceApplier.scheduleApply(params);
             }
         });
 
