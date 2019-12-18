@@ -29,7 +29,7 @@ class AnimationTypePreference(context: Context, attrs: AttributeSet?) : ListPref
 
     init {
         buildEntries {
-            addEntry(R.string.animation_type_default, "")
+            addEntry(R.string.animation_type_blink, AnimationType.TYPE_BLINK)
             if (AnimationType.hasControlRemoteAppTransitionPermission(context)) {
                 addEntry(R.string.animation_type_pie, AnimationType.TYPE_PIE)
             } else {
@@ -40,8 +40,8 @@ class AnimationTypePreference(context: Context, attrs: AttributeSet?) : ListPref
             }
             addEntry(R.string.animation_type_slide_up, AnimationType.TYPE_SLIDE_UP)
             addEntry(R.string.animation_type_scale_up, AnimationType.TYPE_SCALE_UP)
-            addEntry(R.string.animation_type_blink, AnimationType.TYPE_BLINK)
             addEntry(R.string.animation_type_fade, AnimationType.TYPE_FADE)
+            addEntry(R.string.animation_type_default, "")
         }
     }
 }
