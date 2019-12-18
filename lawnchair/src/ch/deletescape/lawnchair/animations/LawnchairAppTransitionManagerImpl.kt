@@ -67,7 +67,7 @@ class LawnchairAppTransitionManagerImpl(context: Context) : LauncherAppTransitio
     private var useWindowToIcon = false
 
     private val animationType by context.lawnchairPrefs.StringBasedPref("pref_animationType",
-            AnimationType.DefaultAnimation(), { },
+            AnimationType.BlinkAnimation(), { },
             AnimationType.Companion::fromString,
             AnimationType.Companion::toString) { registerRemoteAnimations() }
 
